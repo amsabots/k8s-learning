@@ -16,13 +16,18 @@ FROM node:16-alpine3.11
 WORKDIR /app
 
 COPY *.json ./
+COPY public ./public
+
 COPY --from=Build /k8s/dist ./dist
 
 
-RUN cd dist/ && ls
+
+RUN  ls
 RUN npm install
 
 EXPOSE 4000
 
 RUN rm package-lock.json && ls
+
+CMD [ "npm", "start" ]
 
